@@ -10,7 +10,7 @@ public class AppContextBuilder {
 		webAppContext = new WebAppContext();
 		webAppContext.setDescriptor(webAppContext + "/WEB-INF/web.xml");
 		webAppContext.setResourceBase(".");
-		webAppContext.setContextPath("/runJetty");
+		webAppContext.setContextPath("/SmartRHomes");
 		webAppContext.setAttribute("webContext", webAppContext);
 		return webAppContext;
 	}
