@@ -4,6 +4,7 @@ var mDate = "";
 $(function() {
 	sendJSONAjaxRequest(true, "data/meterIds?p=watermeter", "", fnPopulateMeterId, null);
 	$('#GO').click(function(){
+		fnReCreateTable();
 		sendJSONAjaxRequest(true, "data/meterIdData?p=watermeter&mid="+mid+"&date="+mDate, "", fnPopulateMeterIdData, null);
 	});
 	$('#meters').change(function(){
@@ -22,6 +23,12 @@ function fnPopulateMeterId(responseJson){
 	}
 }
 
+function fnReCreateTable(){
+	$('#meterData').html("");
+	$('#meterData').append('<div class="left header">StartTime</div>');
+	$('#meterData').append('<div class="left header">Duration</div>');
+	$('#meterData').append('<div class="right header">Consumption</div>');
+}
 
 function fnPopulateMeterIdData(responseJson){
 	if(responseJson.length>0){
@@ -32,6 +39,8 @@ function fnPopulateMeterIdData(responseJson){
 		}
 	}
 	else{
+//		$('#meterData').append('<div class="right">'+responseJson[key].consumption+'</div>');
 		alert("No Data.");
 	}
 }
+

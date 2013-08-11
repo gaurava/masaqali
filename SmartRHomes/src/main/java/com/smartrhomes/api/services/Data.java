@@ -16,6 +16,7 @@ import com.smartrhomes.greendata.service.InsertDataService;
 import com.smartrhomes.greendata.service.InsertDataServiceImpl;
 import com.smartrhomes.greendata.service.Meter;
 import com.smartrhomes.greendata.service.NucliouWideMeterData;
+import com.smartrhomes.greendata.service.Nuclious;
 import com.smartrhomes.greendata.util.StringUtil;
 
 @Path("/data/")
@@ -87,6 +88,24 @@ public class Data {
 		
 		boolean flag1 = new InsertDataServiceImpl().updateMeterConfigData(meter);
 		return Response.status(200).entity("nothing"+flag1).build();
+	}
+	
+	@GET
+	@Path("insertNucliousData")
+	public Response insertNucliousData(@QueryParam("nid") String nid,@QueryParam("imei") String imei){
+		
+		Nuclious n = new Nuclious();
+				n.setNucliousId(nid);
+				n.setActive("Active");
+				n.setLocation("Ashwini Layout, 3rd Block");
+				n.setiMEI(imei);
+		/*n.setSleepTime("");
+		n.setWakeupTime("");
+		n.setOrderNo("");*/
+
+		boolean flag1 = new InsertDataServiceImpl().insertNucliousData(n);
+		
+		return Response.status(200).entity("nothing-"+flag1).build();
 	}
 	
 	@GET

@@ -549,7 +549,7 @@ public class InsertDataServiceImpl implements InsertDataService {
 
 	@Override
 	public List<DailyMeterData> getDailyMeterDataForOne(String product,String date, long meterId) {
-		System.out.println("getDailyMeterData");
+		System.out.println("getDailyMeterDataForOne");
 		Meter m = getMeterConfigData(product, String.valueOf(meterId));
 		String nid = m.getNucliousId();
 		String mid = m.getMeterId();

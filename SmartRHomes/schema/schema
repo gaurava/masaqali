@@ -25,17 +25,9 @@ create column family NucliousData
 
 drop column family DailyMeterData;
 create column family DailyMeterData
-    with comparator = 'CompositeType(LongType,LongType,UTF8Type,UTF8Type,UTF8Type,IntegerType)'
-    and key_validation_class = 'UTF8Type'
-    and default_validation_class = 'UTF8Type';
-
-2nd Plan::::        
-drop column family DailyMeterData;
-create column family DailyMeterData
     with comparator = 'CompositeType(LongType,UTF8Type,LongType,UTF8Type,LongType)'
     and key_validation_class = 'UTF8Type'
     and default_validation_class = 'UTF8Type';
-        
         
 //==================================================================        
         
