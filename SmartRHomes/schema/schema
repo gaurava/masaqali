@@ -1,0 +1,80 @@
+drop keyspace Greendata;
+create keyspace Greendata
+    with strategy_options = [{replication_factor:1}]
+    and placement_strategy = 'org.apache.cassandra.locator.SimpleStrategy';
+
+use Greendata;
+
+drop column family MeterData;
+create column family MeterData
+    with comparator = UTF8Type
+    and default_validation_class = 'BytesType'
+    and key_validation_class = 'UTF8Type';
+
+drop column family MeterIDData;
+create column family MeterIDData
+    with comparator = 'UTF8Type'
+    and default_validation_class = 'UTF8Type'
+    and key_validation_class = 'UTF8Type';
+    
+drop column family NucliousData;
+create column family NucliousData
+    with comparator = UTF8Type
+    and default_validation_class = 'BytesType'
+    and key_validation_class = 'UTF8Type';
+
+drop column family DailyMeterData;
+create column family DailyMeterData
+    with comparator = 'CompositeType(LongType,LongType,UTF8Type,UTF8Type,UTF8Type,IntegerType)'
+    and key_validation_class = 'UTF8Type'
+    and default_validation_class = 'UTF8Type';
+
+2nd Plan::::        
+drop column family DailyMeterData;
+create column family DailyMeterData
+    with comparator = 'CompositeType(LongType,UTF8Type,LongType,UTF8Type,LongType)'
+    and key_validation_class = 'UTF8Type'
+    and default_validation_class = 'UTF8Type';
+        
+        
+//==================================================================        
+        
+
+drop column family AreaCode;
+create column family AreaCode
+    with comparator = UTF8Type
+    and default_validation_class = 'UTF8Type'
+    and key_validation_class = 'UTF8Type';
+
+drop column family Npanxx;
+create column family Npanxx
+    with comparator = AsciiType
+    and default_validation_class = 'UTF8Type'
+    and key_validation_class = 'UTF8Type';
+    
+create column family StateNpaIndexStatic
+    with comparator = 'CompositeType(UTF8Type,LongType,LongType)'
+    and key_validation_class = 'UTF8Type'
+    and default_validation_class = 'UTF8Type';
+    
+create column family StateNpaIndexDynamic
+    with comparator = 'DynamicCompositeType(s=>UTF8Type,l=>LongType)'
+    and key_validation_class = 'UTF8Type'
+    and default_validation_class = 'UTF8Type';  
+    
+    
+use Greendata;
+
+create column family start
+with column_type = 'Standard'
+  and comparator = 'UTF8Type'
+  and default_validation_class = 'UTF8Type'
+  and key_validation_class = 'UTF8Type'
+  and read_repair_chance = 0.1
+  and gc_grace = 864000
+  and min_compaction_threshold = 4
+  and max_compaction_threshold = 32
+  and replicate_on_write = true
+  and compaction_strategy = 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy';
+  
+  

@@ -1,0 +1,124 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: verdana;
+	font-size:12px;
+}
+
+.outermostShell_Orange{
+ padding: 20px; border-radius: 8px; height: 100%; border: 8px solid #EE872A;
+}
+
+.container {
+	height: 100%;
+	width: 573px;
+	font-size: 0;
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	border-top: 1px solid #000;
+	-webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+}
+
+.container > .left, .container > .right {
+	display: inline-block;
+	*display: inline;
+	zoom: 1;
+	vertical-align: top;
+	text-align: center;
+}
+
+.left {
+	width: 32%;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+}
+
+.right {
+	width: 35.6%;
+	border-bottom: 1px solid #000;
+}
+
+.header{
+	background-color:gray;
+}
+
+select{
+	display: inline-block;
+	height: 28px;
+	line-height: 28px;
+	border: 1px solid #aaa;
+	padding: 4px;
+	color: #555;
+	-webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+}
+
+input{
+	display: inline-block;
+	height: 26px;
+	line-height: 26px;
+	border: 1px solid #aaa;
+	color: #555;
+	-webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+}
+
+.meterId{
+	float:left;
+}
+
+.date{
+	float:left;
+	margin-left:10px;
+}
+
+.submit{
+	float:left;
+	margin-left:10px;
+}
+
+.submit input{
+	display: inline-block;
+	height: 26px;
+	line-height: 26px;
+	border: 1px solid #aaa;
+	color: #555;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.containerSeparator{
+	padding-top:50px;
+}
+
+/* hover box */
+#hoverbox{
+    position: absolute;
+    visibility: hidden;
+    color:#000;
+    font-size:12px;
+    border: 1px solid #000;
+    background-color: white;
+    /*width: 80px;
+    height: 15px;*/
+    padding: 5px;
+}
+.mezBodyDialog{
+	text-align: left; padding:19px 0px 0px 70px; font-size:13px;
+}
+.mezBodyDialogSimple{
+	text-align: left; padding:13px 0 0 14px; font-size:13px;
+}
+.dialogContentBubble{
+	font-size: 12px;
+	color : black;
+	padding-top: 5px;
+	text-align: center;
+	}
+.button{
+	font-size: 8pt;
+}

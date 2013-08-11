@@ -1,7 +1,10 @@
 package com.smartrhomes.api.main;
 
 import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.server.handler.ContextHandlerCollection;
+import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.eclipse.jetty.util.resource.Resource;
 
 import com.smartrhomes.api.context.AppContextBuilder;
 import com.smartrhomes.api.server.JettyServer;
@@ -13,7 +16,7 @@ public class JettyFromMain {
 		
 		ContextHandlerCollection contexts = new ContextHandlerCollection();
 		
-		contexts.setHandlers(new Handler[] { new AppContextBuilder().buildWebAppContext(),new AppContextBuilder().buildServletContext()});
+		contexts.setHandlers(new Handler[] { new AppContextBuilder().buildStaticContext() ,new AppContextBuilder().buildServletContext()});
 		
 		final JettyServer jettyServer = new JettyServer();
 		jettyServer.setHandler(contexts);

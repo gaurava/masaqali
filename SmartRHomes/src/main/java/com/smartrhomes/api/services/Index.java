@@ -33,7 +33,7 @@ public class Index {
 	@Produces("text/html")
 	public Response  index() throws URISyntaxException {		
 	
-		File f = new File(System.getProperty("user.dir")+"/index.html");
+		File f = new File(System.getProperty("user.dir")+"/html/index.html");
 		
 		String mt = new MimetypesFileTypeMap().getContentType(f);
 		return Response.ok(f, mt).build();		
@@ -41,11 +41,13 @@ public class Index {
 	}	
 	
 	@GET	
-	@Path("/hello")
+	@Path("/dashboard")
 	public Response  helloGet() {	
 		
-		return Response.status(200).entity("HTTP GET method called").build();
+		File f = new File(System.getProperty("user.dir")+"/html/Dashboard.html");
 		
+		String mt = new MimetypesFileTypeMap().getContentType(f);
+		return Response.ok(f, mt).build();
 	}
 
     @POST

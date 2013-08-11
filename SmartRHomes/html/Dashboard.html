@@ -1,0 +1,49 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Monitoring Dashboard</title>
+<link rel="stylesheet" href="static/css/dashboard.css">
+<script type="text/javascript" src="static/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="static/js/commonUtils.js"></script>
+<script type="text/javascript" src="static/js/commonMessage.js"></script>
+<script type="text/javascript" src="static/js/dashboard.js"></script>
+
+</head>
+<body>
+	<!-- <div style="opacity:0.5;position:absolute;left:50px;width:300px;height:150px;background-color:#40B3DF"></div> -->
+
+	<div id="dataContainer" class="outermostShell_Orange">
+			<div id="meterId" class="meterId">
+				<select id="meters" size=1>
+					<option value="Select Meter ID" selected="selected" disabled>Select
+						Meter ID</option>
+				</select>
+			</div>
+			<div id="meteringDateContainer" class="date">
+				<input type="date" name="meteringDate" id="meteringDate">
+			</div>
+			<div id="submit" class="submit">
+				<input type="button" name="GO" id="GO" value="GO"/>
+			</div>
+			
+			<div class="containerSeparator">
+				<div id="meterData" class="container">
+					<div class="left header">StartTime</div>
+					<div class="left header">Duration</div>
+					<div class="right header">Consumption</div>
+					<!-- <div class="left">13:40:00</div>
+					<div class="left">100</div>
+					<div class="right">56</div> -->
+				</div>
+			</div>
+			
+
+		<!-- <div id="cutOffDateTime">
+		<input type="datetime-local" name="bdaytime">
+	</div> -->
+
+	</div>
+<div id="gs">gaurava</div>
+</body>
+</html>

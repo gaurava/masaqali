@@ -107,7 +107,7 @@ public class CassandraClientImpl implements CassandraClient {
 		if (logger.isDebugEnabled()) {
 			logger.debug("CassandraClient.insertMultiDataTypeColumns; column family {} key:{},columns:{}", new Object[]{columnFamily, rowKey, columns});
 		}
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 		Mutator<String> mutator = HFactory.createMutator(keyspaceObj, StringSerializer.get());
 		
@@ -180,7 +180,7 @@ public class CassandraClientImpl implements CassandraClient {
 		}
 
 		try {
-			CassandraConnection connection = getConnection("one");;
+			CassandraConnection connection = getConnection("one");
 			Keyspace keyspaceObj = connection.getKeyspace();
 			Mutator<String> mutator = HFactory.createMutator(keyspaceObj, StringSerializer.get());
 			ThriftColumnFactory columnFactory = new ThriftColumnFactory();
@@ -212,7 +212,7 @@ public class CassandraClientImpl implements CassandraClient {
 		if (logger.isDebugEnabled()) {
 			logger.debug("CassandraClient.multiInsert rows column family {} ", columnFamily);
 		}
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 
 		Mutator<String> mutator = HFactory.createMutator(keyspaceObj, StringSerializer.get());
@@ -249,7 +249,7 @@ public class CassandraClientImpl implements CassandraClient {
 		if (logger.isDebugEnabled()) {
 			logger.debug("CassandraClient.multiGet column family {} keysList {}", columnFamily, keysList);
 		}
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 
 
@@ -312,7 +312,7 @@ public class CassandraClientImpl implements CassandraClient {
 		if (logger.isDebugEnabled()) {
 			logger.debug("CassandraClient.getAllColumns() column family {} key {}", columnFamily, key);
 		}
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 
 		RangeSlicesQuery<String, String, String> rangeSlicesQuery = HFactory.createRangeSlicesQuery(keyspaceObj, StringSerializer.get(), StringSerializer.get(), StringSerializer.get());
@@ -350,7 +350,7 @@ public class CassandraClientImpl implements CassandraClient {
 		if (logger.isDebugEnabled()) {
 			logger.debug("CassandraClient.deleteColumns from column family {} key {}", columnFamily, key);
 		}
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 		Mutator<String> mutator = HFactory.createMutator(keyspaceObj, StringSerializer.get());
 
@@ -376,7 +376,7 @@ public class CassandraClientImpl implements CassandraClient {
 		if (logger.isDebugEnabled()) {
 			logger.debug("CassandraClient.multiDelete column family {} keysList {}", columnFamily, keysList);
 		}
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 		Mutator<String> mutator = HFactory.createMutator(keyspaceObj, StringSerializer.get());
 		mutator.addDeletion(keysList, columnFamily);
@@ -395,7 +395,7 @@ public class CassandraClientImpl implements CassandraClient {
 		}
 
 		try {
-			CassandraConnection connection = getConnection("one");;
+			CassandraConnection connection = getConnection("one");
 			Keyspace keyspaceObj = connection.getKeyspace();
 			Mutator<String> mutator = HFactory.createMutator(keyspaceObj, StringSerializer.get());
 			for (String rowkey : rowkeys) {
@@ -428,7 +428,7 @@ public class CassandraClientImpl implements CassandraClient {
 		}
 
 		try {
-			CassandraConnection connection = getConnection("one");;
+			CassandraConnection connection = getConnection("one");
 			Keyspace keyspaceObj = connection.getKeyspace();
 			Mutator<String> mutator = HFactory.createMutator(keyspaceObj, StringSerializer.get());
 			for (String columnName : columnNames) {
@@ -460,7 +460,7 @@ public class CassandraClientImpl implements CassandraClient {
 	/*@Override
 	public void insertCompositeColumn(String columnFamily, String key, CompositeColumns compositeColumns) throws DAOExceptions {
 		try {
-			CassandraConnection connection = getConnection("one");;
+			CassandraConnection connection = getConnection("one");
 			Keyspace keyspaceObj = connection.getKeyspace();
 			Mutator<String> mutator = HFactory.createMutator(keyspaceObj, StringSerializer.get());
 			
@@ -480,7 +480,7 @@ public class CassandraClientImpl implements CassandraClient {
 	@Override
 	public void insertCompositeColumn(String columnFamily, List<CompositeColumns> cols) throws DAOExceptions {
 		try {
-			CassandraConnection connection = getConnection("one");;
+			CassandraConnection connection = getConnection("one");
 			Keyspace keyspaceObj = connection.getKeyspace();
 			Mutator<String> mutator = HFactory.createMutator(keyspaceObj, StringSerializer.get());
 			HColumn<Composite, String> hColumn;
@@ -508,7 +508,7 @@ public class CassandraClientImpl implements CassandraClient {
 	public void insertDynamicComposite(String columnFamily, String key, List<?> columnNames, String columnValues) throws DAOExceptions {
 		logger.debug("CassandraClient.insertDynamicComposite");
 		try {
-			CassandraConnection connection = getConnection("one");;
+			CassandraConnection connection = getConnection("one");
 			Keyspace keyspaceObj = connection.getKeyspace();
 			Mutator<String> mutator = HFactory.createMutator(keyspaceObj, StringSerializer.get()); 
 			/*DynamicComposite itemIdColumnName = new DynamicComposite();
@@ -538,7 +538,7 @@ public class CassandraClientImpl implements CassandraClient {
 		if (logger.isDebugEnabled()) {
 			logger.debug("CassandraClient.getColumnNames column family {} key {}", columnFamily, key);
 		}
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 
 		SliceQuery<String, DynamicComposite, String> sliceQuery = HFactory.createSliceQuery(keyspaceObj, StringSerializer.get(), new DynamicCompositeSerializer(), StringSerializer.get());
@@ -662,7 +662,7 @@ public class CassandraClientImpl implements CassandraClient {
 	}
 	
 	private ColumnSlice<Composite, String> fetchCompositeColumnsForIndex(String rowKey, String columnFamily, String start, String end, boolean reversed) {
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 		SliceQuery<String, Composite, String> sliceQuery = HFactory.createSliceQuery(keyspaceObj, StringSerializer.get(), new CompositeSerializer(), StringSerializer.get());
 		sliceQuery.setColumnFamily(columnFamily);
@@ -729,7 +729,7 @@ public class CassandraClientImpl implements CassandraClient {
 	}
 	
 	private ColumnSliceIterator<String, DynamicComposite, String> fetchDynamicCompositeColumnsString(String rowKey, String columnFamily, List<String> start, List<String> end, boolean reversed) {
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 		SliceQuery<String, DynamicComposite, String> sliceQuery = HFactory.createSliceQuery(keyspaceObj, StringSerializer.get(), new DynamicCompositeSerializer(), StringSerializer.get());
 		sliceQuery.setColumnFamily(columnFamily);
@@ -739,7 +739,7 @@ public class CassandraClientImpl implements CassandraClient {
 	}
 	
 	private ColumnSliceIterator<String, Composite, String> fetchCompositeColumnsString(String rowKey, String columnFamily, List<String> start, List<String> end, boolean reversed) {
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 		SliceQuery<String, Composite, String> sliceQuery = HFactory.createSliceQuery(keyspaceObj, StringSerializer.get(), new CompositeSerializer(), StringSerializer.get());
 		sliceQuery.setColumnFamily(columnFamily);
@@ -749,7 +749,7 @@ public class CassandraClientImpl implements CassandraClient {
 	}
 
 	private ColumnSlice<Composite, String> fetchCompositeColumns(String rowKey, String columnFamily, List<String> start, List<String> end, boolean reversed) {
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 		SliceQuery<String, Composite, String> sliceQuery = HFactory.createSliceQuery(keyspaceObj, StringSerializer.get(), new CompositeSerializer(), StringSerializer.get());
 		sliceQuery.setColumnFamily(columnFamily);
@@ -776,7 +776,7 @@ public class CassandraClientImpl implements CassandraClient {
 	}
 	
 	private ColumnSliceIterator<String, DynamicComposite, byte[]> fetchDynamicCompositeColumns(String rowKey, String columnFamily, List<String> start, List<String> end, boolean reversed) {
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 		SliceQuery<String, DynamicComposite, byte[]> sliceQuery = HFactory.createSliceQuery(keyspaceObj, StringSerializer.get(), new DynamicCompositeSerializer(), BytesArraySerializer.get());
 		sliceQuery.setColumnFamily(columnFamily);
@@ -786,7 +786,7 @@ public class CassandraClientImpl implements CassandraClient {
 	}
 
 	public void deletDynamicCompositeColumns(String rowKey, String columnFamily, List<DynamicComposite> columnsToDelete) throws DAOExceptions {
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 		Mutator<String> mutator = HFactory.createMutator(keyspaceObj, StringSerializer.get());
 		for (DynamicComposite composite : columnsToDelete) {
@@ -823,7 +823,7 @@ public class CassandraClientImpl implements CassandraClient {
 	}
 
 	/*public void insertDynamicCompositeColumns(String rowKey, String columnFamily, List<HColumn<DynamicComposite, ?>> compositeColumns) {
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 		Mutator<String> mutator = HFactory.createMutator(keyspaceObj, StringSerializer.get());
 		for (HColumn<?,?> hColumn : compositeColumns) {
@@ -883,7 +883,7 @@ public class CassandraClientImpl implements CassandraClient {
 		if (logger.isDebugEnabled()) {
 			logger.debug("CassandraClient.deleteColumnByCompositeColumns column family {} key {} columns {}", new Object[]{columnFamily, key, columnNames});
 		}
-		CassandraConnection connection = getConnection("one");;
+		CassandraConnection connection = getConnection("one");
 		Keyspace keyspaceObj = connection.getKeyspace();
 		SliceQuery<String, DynamicComposite, String> sliceQuery = HFactory.createSliceQuery(keyspaceObj, StringSerializer.get(), new DynamicCompositeSerializer(), StringSerializer.get());
 		sliceQuery.setColumnFamily(columnFamily);

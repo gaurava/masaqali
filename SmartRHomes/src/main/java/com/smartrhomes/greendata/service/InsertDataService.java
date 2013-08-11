@@ -37,15 +37,6 @@ public interface InsertDataService {
 	
 	boolean insertDailyMeterData(List<DailyMeterData> dailyMeterData);
 	
-	DailyMeterData getDailyMeterData(Date date, String time24hFormat, long meterId);
-
-
-	/**
-	 * @param nucliousId
-	 * @param date  (yyyy-mm-DD)
-	 * @return
-	 */
-	List<DailyMeterData> getdailyMeterData(long nucliousId, String date);
 
 	/**
 	 * @param cutOfDate (yyyy-mm-DD)
@@ -54,6 +45,15 @@ public interface InsertDataService {
 	 */
 	List<NucliouWideMeterData> getAllMeterDataForNucliousAndCutOfDate(
 			String cutOfDate, long nucliousId);
+
+	/**
+	 * @param nucliousId
+	 * @param date  (yyyy-mm-DD)
+	 * @return
+	 */
+	List<DailyMeterData> getDailyMeterData(long nucliousId, String date,String startRange, String endRange);
+
+	List<DailyMeterData> getDailyMeterDataForOne(String product, String date,long meterId);
 
 	
 }

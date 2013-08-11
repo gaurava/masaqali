@@ -1,6 +1,5 @@
 package com.smartrhomes.greendata.service;
 
-import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,22 +9,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.TreeSet;
+
+import javax.ws.rs.ext.Provider;
 
 import com.google.gson.Gson;
-import com.smartrhomes.greendata.connection.CassandraConnectionPool;
-import com.smartrhomes.greendata.connection.ConsistencyLevel;
-import com.smartrhomes.greendata.connection.DataStoreConfig;
-import com.smartrhomes.greendata.connection.DataStoreNodeConfig;
 import com.smartrhomes.greendata.dao.CassandraClient;
 import com.smartrhomes.greendata.dao.CassandraClientImpl;
 import com.smartrhomes.greendata.dao.Column;
 import com.smartrhomes.greendata.dao.CompositeColumns;
-import com.smartrhomes.greendata.dao.DataType;
 import com.smartrhomes.greendata.exceptions.DAOExceptions;
 import com.smartrhomes.greendata.exceptions.UncheckedException;
 import com.smartrhomes.greendata.util.DateUtil;
-import com.smartrhomes.greendata.util.JSerializer;
 import com.smartrhomes.greendata.util.StringUtil;
 
 
@@ -33,12 +27,10 @@ import com.smartrhomes.greendata.util.StringUtil;
  * @author "Gaurava Srivastava"
  *
  */
+//@Provider
 public class InsertDataServiceImpl implements InsertDataService {
 
 	private static final String configName = "Test Cluster";
-//	private static final String keySpace = "Greendata";
-//	private static final int MAX_ACTIVE_CONNECTION = 10;
-//	private static final int MAXIMUM_FETCH_ROWS = 100;
 
 	private static CassandraClient cassandraClient;
 
@@ -74,9 +66,9 @@ public class InsertDataServiceImpl implements InsertDataService {
 		meter.setSoftWVersion("S-0.1");
 		meter.setHardWVersion("M-0.1");
 		//		System.out.println(meter);
-		InsertDataService insertDataService = new InsertDataServiceImpl();
+//		InsertDataService insertDataService = new InsertDataServiceImpl();
 		//		insertDataService.insertMeterData(meter);
-		//		insertDataService.insertMeterIDData(meter);
+//				insertDataService.insertMeterIDData(meter);
 		//		Meter meterx = insertDataService.getMeterConfigData("watermeter","1280");
 		//		List<String> meterz = insertDataService.getMeterIDs("watermeter");
 		//		
@@ -115,7 +107,7 @@ public class InsertDataServiceImpl implements InsertDataService {
 		//		List<DailyMeterData> testData = DataExtractionCSV.fetchTestData();
 		//		insertDataService.insertDailyMeterData(testData);
 
-		new InsertDataServiceImpl().getAllMeterDataForNucliousAndCutOfDate("2013-07-10",2);
+//		new InsertDataServiceImpl().getAllMeterDataForNucliousAndCutOfDate("2013-07-10",2);
 
 	}
 
@@ -191,6 +183,7 @@ public class InsertDataServiceImpl implements InsertDataService {
 
 	@Override
 	public Meter getMeterConfigData(String product,String meterId) {
+		System.out.println("getMeterConfigData");
 		Meter m = new Meter();
 		try {
 			Map<String, ByteBuffer> meterData = cassandraClient.getMultiDataTypeColumns(ColumnFamily.MeterData.name(),
@@ -211,6 +204,7 @@ public class InsertDataServiceImpl implements InsertDataService {
 				}
 			}
 			m.setMeterId(meterId);
+//			System.out.println("meterConfigData: "+m);
 			return m;
 		} catch (DAOExceptions e) {
 			System.out.println("Error while retrieving data :"+e.getMessage());
@@ -396,7 +390,7 @@ public class InsertDataServiceImpl implements InsertDataService {
 	}
 
 	@Override
-	public List<DailyMeterData> getdailyMeterData(long nucliousId,String date){
+	public List<DailyMeterData> getDailyMeterData(long nucliousId,String date,String startRange, String endRange){
 
 		int i=0;
 		List<Object> o = null;
@@ -407,7 +401,7 @@ public class InsertDataServiceImpl implements InsertDataService {
 		List<CompositeColumns> compositeColumnsByIndex=null;
 		try{
 			compositeColumnsByIndex = cassandraClient.getCompositeColumnsByIndex(StringUtil.getRowKey(nucliousId,date), 
-					ColumnFamily.DailyMeterData.name(), "0", String.valueOf(Long.MAX_VALUE), false);
+					ColumnFamily.DailyMeterData.name(), startRange, endRange, false);
 		}catch(DAOExceptions e){
 			return null;
 		}
@@ -438,7 +432,8 @@ public class InsertDataServiceImpl implements InsertDataService {
 						}
 					}
 				}
-
+				
+				dm.setNucliousId(String.valueOf(nucliousId));
 				dataJSON = new Gson().fromJson(c.getColValue(), DailyMeterDataJSON.class);
 				dm.setDuaration(dataJSON.getDuaration());
 				dm.setConsumption(dataJSON.getConsumption());
@@ -453,8 +448,8 @@ public class InsertDataServiceImpl implements InsertDataService {
 
 	@Override
 	public List<NucliouWideMeterData> getAllMeterDataForNucliousAndCutOfDate(String cutOfDate, long nucliousId){
-		List<DailyMeterData> meterDataCutOfDate = getdailyMeterData(nucliousId, cutOfDate);
-		List<DailyMeterData> previousDayMeterData = getdailyMeterData(nucliousId, DateUtil.previousDate(cutOfDate));
+		List<DailyMeterData> meterDataCutOfDate = getDailyMeterData(nucliousId, cutOfDate,"0", String.valueOf(Long.MAX_VALUE));
+		List<DailyMeterData> previousDayMeterData = getDailyMeterData(nucliousId, DateUtil.previousDate(cutOfDate),"0", String.valueOf(Long.MAX_VALUE));
 		List<NucliouWideMeterData> listMeterData = null;
 		if(null!=meterDataCutOfDate && null!=previousDayMeterData){
 			listMeterData = new ArrayList<NucliouWideMeterData>();
@@ -553,9 +548,20 @@ public class InsertDataServiceImpl implements InsertDataService {
 	}
 
 	@Override
-	public DailyMeterData getDailyMeterData(Date date, String time24hFormat, long meterId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<DailyMeterData> getDailyMeterDataForOne(String product,String date, long meterId) {
+		System.out.println("getDailyMeterData");
+		Meter m = getMeterConfigData(product, String.valueOf(meterId));
+		String nid = m.getNucliousId();
+		String mid = m.getMeterId();
+		String ml = String.valueOf(Long.valueOf(mid)+1);
+		List<DailyMeterData> dmd = new ArrayList<DailyMeterData>();
+		for (DailyMeterData md : getDailyMeterData(Long.valueOf(nid), date, mid,ml)) {
+//			System.out.println("***** "+md);
+			if(md.getMeterId().equalsIgnoreCase(mid)){
+				dmd.add(md);
+			}
+		}
+		return dmd;
 	}
 
 
