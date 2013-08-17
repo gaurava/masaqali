@@ -289,7 +289,7 @@ public class InsertDataServiceImpl implements InsertDataService {
 	@Override
 	public boolean insertNucliousIDData(Nuclious nuclious) {
 		List<Column<?>> col = new ArrayList<Column<?>>();
-		col.add(new Column<String>(Nuclious.FIELD.nucliousId.name(), nuclious.getNucliousId()));
+		col.add(new Column<String>(nuclious.getNucliousId(), nuclious.getNucliousId()));
 		try {
 			cassandraClient.insertMultiDataTypeColumns(ColumnFamily.NucliousData.name(), Nuclious.ROW_KEY, col,null);
 		} catch (DAOExceptions e) {
