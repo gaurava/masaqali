@@ -92,6 +92,10 @@ public class StringUtil {
 		System.out.println(a);
 		else
 			System.out.println("nullll");
+		
+		String s = "A6000000";
+		long v = HexToInt(s, true);
+		System.out.println(v+1);
 			
 	}
 	
@@ -118,12 +122,83 @@ public class StringUtil {
 	public static <T> T get(Serializer<T> serializer, ByteBuffer columnValue) {
 		return serializer.fromByteBuffer(columnValue);
 	}
-
 	
 	public static <T> String toJson(T nl) {
 		Gson gson = new GsonBuilder().serializeNulls().create();
 		Type nuType = new TypeToken<T>() {}.getType();
 		String s = gson.toJson(nl,nuType);
 		return s;
+	}
+	
+	/**
+	 * To Use this function POJO should implement JsonConversionInterface
+	 * @param data
+	 * @param c
+	 * @return
+	 */
+	public static JsonConversionInterface fromJson(String data, Type c){
+		JsonConversionInterface jInterface = null;
+		if(null!=c){
+			Gson gson = new GsonBuilder().serializeNulls().create();
+			jInterface = gson.fromJson(data, c);
+		}
+		return jInterface;
+	}
+
+	public static Integer HexToInt(String hex, boolean reverse){
+		return HexToInt(hex, reverse, 16);
+	}
+	
+	public static Integer HexToInt(String hex, boolean reverse, int base){
+		if(null!=hex){
+			try {
+				if(reverse){
+					return Integer.parseInt(reverse(hex), base);
+				}else{
+					return Integer.parseInt(hex, base);
+				}
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				return -1;
+			}
+		}
+		return 0;
+	}
+	public static Long HexToLong(String hex, boolean reverse){
+		return HexToLong(hex, reverse, 16);
+	}
+
+	public static Long HexToLong(String hex, boolean reverse, int base){
+		if(null!=hex){
+			try {
+				if(reverse){
+					return Long.parseLong(reverse(hex), base);
+				}else{
+					return Long.parseLong(hex, base);
+				}
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				return -1L;
+			}
+		}
+		return 0L;
+	}
+	
+	private static String reverse(String hex) {
+		if(null!=hex){
+			char[] c = hex.toCharArray();
+			replace(c);
+			return String.valueOf(c);
+		}
+		return null;
+	}
+
+	private static void replace(char[] c) {
+		char c1;
+		for(int i=0,j=c.length-1;i<(c.length-1)/2;i++,j--){
+			c1=c[i];
+			c[i]=c[j];
+			c[j]=c1;
+		}
 	}
 }

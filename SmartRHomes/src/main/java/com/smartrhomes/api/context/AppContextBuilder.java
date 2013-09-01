@@ -1,10 +1,7 @@
 package com.smartrhomes.api.context;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.eclipse.jetty.server.handler.ContextHandler;
-import org.eclipse.jetty.server.handler.ResourceHandler;
+//import org.eclipse.jetty.server.handler.ContextHandler;
+//import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
@@ -14,32 +11,28 @@ import com.smartrhomes.greendata.connection.CassandraOpenConnection;
 
 public class AppContextBuilder {
 	
-//	private WebAppContext webAppContext;
-	private ContextHandler staticContext;
+	private WebAppContext webAppContext;
+//	private ContextHandler staticContext;
 	private ServletContextHandler servletContext;
+	private final String webappDirLocation = "src/main/webapp";
 	
-/*	public WebAppContext buildWebAppContext(){
+	public WebAppContext buildWebAppContext(){
 		webAppContext = new WebAppContext();
-		webAppContext.setDescriptor(webAppContext + "/WEB-INF/web.xml");
-		webAppContext.setResourceBase(".");
-		webAppContext.setContextPath("/SmartRHomes");
+		webAppContext.setDescriptor(webAppContext+"/WEB-INF/web.xml");
+		webAppContext.setResourceBase("../SmartRHomes/"+webappDirLocation);
+		webAppContext.setContextPath("/");
 		webAppContext.setAttribute("webContext", webAppContext);
-//		ServletHolder h = new ServletHolder(new HttpServletDispatcher());
-//		h.setInitParameter("javax.ws.rs.Application", "com.smartrhomes.api.services.HTMLServices");
-//		servletContext.addServlet(h, "/*");
-//		webappcontext.addServlet(new ServletHolder(new HelloServlet()), "/hello");
-//		webAppContext.setAttribute("CassandraConnectionPool",new CassandraOpenConnection());
 		return webAppContext;
-	}*/
+	}
 	
 	public ServletContextHandler buildServletContext(){
 		servletContext = new ServletContextHandler();
-		servletContext.setContextPath("/SmartRHomes");
+		servletContext.setContextPath("/service");
 		servletContext.setResourceBase(".");
 		ServletHolder h = new ServletHolder(new HttpServletDispatcher());
 		h.setInitParameter("javax.ws.rs.Application", "com.smartrhomes.api.services.MyServices");
-//		h.setInitParameter("resteasy.guice.modules", "com.smartrhomes.api.services.ServiceCollection");
-		/*Map<String,String> params = new HashMap<String, String>();
+		/*h.setInitParameter("resteasy.guice.modules", "com.smartrhomes.api.services.ServiceCollection");
+		Map<String,String> params = new HashMap<String, String>();
 		params.put("javax.ws.rs.Application", "com.smartrhomes.api.services.MyServices");
 		params.put("resteasy.scan.providers", "true");
 		h.setInitParameters(params);*/
@@ -51,12 +44,12 @@ public class AppContextBuilder {
 		return servletContext;
 	}
 	
-	public ContextHandler buildStaticContext(){
+/*	public ContextHandler buildStaticContext(){//Not in use Now
 		staticContext = new ContextHandler();
 		staticContext.setContextPath("/SmartRHomes/static");
 		staticContext.setHandler(new ResourceHandler());
-		staticContext.setResourceBase("static");
+		staticContext.setResourceBase("html");
 		return staticContext;
-	}
-
+	}*/
+	
 }

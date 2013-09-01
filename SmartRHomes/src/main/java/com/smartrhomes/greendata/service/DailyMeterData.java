@@ -6,14 +6,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.smartrhomes.greendata.util.DateUtil;
+import com.smartrhomes.greendata.util.JsonConversionInterface;
+
 /**
  * @author "Gaurava Srivastava"
  *
  */
-public class DailyMeterData {
+public class DailyMeterData implements JsonConversionInterface {
 	
 	enum FIELD{
-		date,time,startDate,startTime,product,nucliousId,meterId,markFirst,duaration,consumption,totalQty,batteryVoltage
+		date,time,startDate,startTime,product,nucliousId,meterId,markFirst,duaration,consumption,totalQty,batteryVoltage,timestamp
 	}
 
 	private String date;
@@ -21,13 +24,14 @@ public class DailyMeterData {
 	private String startDate;
 	private String startTime;
 	private String product;
-	private String nucliousId;
-	private String meterId;
+	private long nucliousId;
+	private long meterId;
 	private String markFirst;
 	private long duaration;
 	private long consumption;
 	private long totalQty;
 	private double batteryVoltage;
+	private long timestamp = DateUtil.getCurrentDateTime();//Default while Taking Input from Nuclious
 	
 	public String getDate() {
 		return date;
@@ -59,16 +63,16 @@ public class DailyMeterData {
 	public void setProduct(String product) {
 		this.product = product;
 	}
-	public String getNucliousId() {
+	public long getNucliousId() {
 		return nucliousId;
 	}
-	public void setNucliousId(String nucliousId) {
+	public void setNucliousId(long nucliousId) {
 		this.nucliousId = nucliousId;
 	}
-	public String getMeterId() {
+	public long getMeterId() {
 		return meterId;
 	}
-	public void setMeterId(String meterId) {
+	public void setMeterId(long meterId) {
 		this.meterId = meterId;
 	}
 	public String getMarkFirst() {
@@ -107,6 +111,12 @@ public class DailyMeterData {
 		this.batteryVoltage = batteryVoltage;
 	}
 	
+	public long getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
 	@Override
 	public String toString() {
 		StringBuilder st = new StringBuilder();
@@ -123,6 +133,7 @@ public class DailyMeterData {
 				.append("\"Consumption\":").append(consumption)
 				.append(",\"TotalQty\":").append(totalQty)
 				.append(",\"BatteryVoltage\":").append(batteryVoltage)
+				.append(",\"Timestamp\":").append(timestamp)
 				.append("}").toString();
 	}
 	

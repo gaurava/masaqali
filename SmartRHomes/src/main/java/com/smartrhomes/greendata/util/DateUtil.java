@@ -7,8 +7,12 @@ import java.util.Date;
 
 public class DateUtil {
 
+	//TODO Need to Analyse the uses of SimpleDateFormat   http://www.javacodegeeks.com/2010/07/java-best-practices-dateformat-in.html
+	
+	
 	private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 	private static final String DATE_FORMAT = "yyyy-MM-dd";
+	private static final String TIME_FORMAT = "HH:mm:ss";
 	
 	public static long dateToLong(String date, String time, String dateFormat){
 		
@@ -68,7 +72,6 @@ public class DateUtil {
 			Date bdt = new Date(dt.getTime()-2);
 			return df.format(bdt);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -82,5 +85,11 @@ public class DateUtil {
 		System.out.println(dateToLong("2000-10-10", "00:00", null));
 		System.out.println(longToStringDate(1373427491, null));
 		System.out.println(previousDate("2013-03-1"));
+		System.out.println(System.currentTimeMillis()/1000);
+	}
+
+
+	public static long getCurrentDateTime() {
+		return System.currentTimeMillis()/1000;
 	}
 }

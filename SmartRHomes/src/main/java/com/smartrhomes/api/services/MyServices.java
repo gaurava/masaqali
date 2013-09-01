@@ -41,10 +41,8 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
-import com.google.inject.servlet.GuiceFilter;
 import com.smartrhomes.greendata.connection.CassandraOpenConnection;
-import com.smartrhomes.greendata.service.InsertDataServiceImpl;
-import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
+import com.smartrhomes.greendata.service.DataServiceImpl;
 
 public class MyServices extends Application  {
 
@@ -58,9 +56,9 @@ public class MyServices extends Application  {
 //		services.add(GuiceContainer.class);
 //		services.add(ServiceCollection.class);
 		services.add(CassandraOpenConnection.class);
-		services.add(Index.class);
-		services.add(Data.class);
-		services.add(InsertDataServiceImpl.class);
+//		services.add(Index.class);//Depricated
+		services.add(ViewData.class);
+		services.add(DataServiceImpl.class);
 			
 	}
 

@@ -46,8 +46,8 @@ public class DataExtractionCSV {
 				dm.setStartDate(temp[3]);
 				dm.setStartTime(temp[4]);
 				dm.setProduct("watermeter");
-				dm.setNucliousId(temp[2]);
-				dm.setMeterId(temp[1]);
+				dm.setNucliousId(Long.parseLong(temp[2]));
+				dm.setMeterId(Long.parseLong(temp[1]));
 				if(!dt[0].equalsIgnoreCase(marksFirst) && !meterid.equalsIgnoreCase(temp[1])){
 					marksFirst = dt[0];
 					meterid=temp[1];
